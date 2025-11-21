@@ -37,7 +37,7 @@ const QUOTES = [
   }
 ];
 
-// UI Text Translations
+// UI Text Translations btw 
 const TEXTS = {
   en: {
     title: "Vox Traditionis",
