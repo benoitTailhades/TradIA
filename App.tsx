@@ -653,7 +653,7 @@ const App: React.FC = () => {
               </button>
             </div>
             <div className="text-center mt-2 flex justify-center items-center px-4">
-                <p className="text-[10px] text-stone-400 font-serif">{t.disclaimer} <span className="text-stone-300 mx-2">|</span> v1.1 FSSPX</p>
+                <p className="text-[10px] text-stone-400 font-serif">{t.disclaimer} <span className="text-stone-300 mx-2">|</span> v1.1</p>
             </div>
           </div>
         </footer>
