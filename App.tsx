@@ -6,9 +6,14 @@ import { CrossIcon, SendIcon } from './components/Icon';
 // Powerful Pre-Vatican II / Traditional Quotes
 const QUOTES = [
   {
-    latin: "Instaurare Omnia in Christo",
-    en: "To restore all things in Christ.",
-    fr: "Tout restaurer dans le Christ."
+    latin: "Non nobis, Domine, sed nomini tuo da gloriam",
+    en: "Not to us, O Lord, but to Thy name give glory.",
+    fr: "Pas à nous, Seigneur, mais à Votre Nom donnez la gloire." // CORRIGÉ: Votre Nom
+  },
+  {
+    latin: "Stat Crux dum volvitur orbis",
+    en: "The Cross stands while the world turns.",
+    fr: "La Croix demeure tandis que le monde tourne."
   },
   {
     latin: "Quis ut Deus?",
@@ -16,24 +21,19 @@ const QUOTES = [
     fr: "Qui est comme Dieu ?"
   },
   {
-    latin: "Veritas Liberabit Vos",
-    en: "The truth shall make you free.",
-    fr: "La vérité vous rendra libres."
+    latin: "Instaurare Omnia in Christo",
+    en: "To restore all things in Christ.",
+    fr: "Tout restaurer dans le Christ."
   },
   {
-    latin: "Non nobis, Domine, sed nomini tuo da gloriam",
-    en: "Not to us, O Lord, but to Thy name give glory.",
-    fr: "Pas à nous, Seigneur, mais à Ton nom donne la gloire."
+    latin: "Adveniat Regnum Tuum",
+    en: "Thy Kingdom come.",
+    fr: "Que Votre règne arrive."
   },
   {
-    latin: "Extra Ecclesiam nulla salus",
-    en: "Outside the Church there is no salvation.",
-    fr: "Hors de l'Église, point de salut."
-  },
-  {
-    latin: "Lex orandi, lex credendi",
-    en: "The law of praying is the law of believing.",
-    fr: "La loi de la prière est la loi de la foi."
+    latin: "In hoc signo vinces",
+    en: "In this sign thou shalt conquer.",
+    fr: "Par ce signe, vous vaincrez."
   }
 ];
 
@@ -184,7 +184,7 @@ const App: React.FC = () => {
           : "🔑 **Invalid API Key.**\n\nYour API key appears to be incorrect. Check your `.env` file.";
       } else if (error.message === 'MISSING_KEY') {
         errorContent = language === 'fr'
-          ? "❓ **Clé manquante.**\n\nLe fichier `.env` n'est pas détecté ou la variable API_KEY est vide."
+          ? "❓ **Clé manquante.**\n\nLe fichier `.env` n'est pas détecté ou la variable API_KEY (ou clefAPI) est vide."
           : "❓ **Missing Key.**\n\nThe `.env` file was not found or API_KEY is empty.";
       } else if (error.message) {
          errorContent += `\n\n(Erreur technique : ${error.message})`;

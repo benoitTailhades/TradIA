@@ -41,6 +41,8 @@ class GeminiService {
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
       console.warn("Warning: API_KEY is missing. Chat will likely fail.");
+    } else {
+      console.log("Gemini Service Initialized with Key Length:", apiKey.length);
     }
     this.ai = new GoogleGenAI({ apiKey: apiKey || '' });
   }
@@ -49,21 +51,21 @@ class GeminiService {
     const languageInstruction = language === 'fr' 
       ? `ANSWER ONLY IN FRENCH (FRANÇAIS). 
          
-         *** RÈGLES DU FRANÇAIS TRADITIONNEL ***
+         *** RÈGLES DU FRANÇAIS TRADITIONNEL (STRICT) ***
 
-         1. **ADRESSE À DIEU (VOUVOIEMENT RESPECTUEUX)** :
-            - Utilisez le vouvoiement de majesté envers Dieu et la Vierge Marie : "Vous", "Votre", "Vos" (avec une majuscule de respect, mais PAS TOUT EN MAJUSCULES).
-            - Interdiction stricte du tutoiement ("Tu", "Ton").
+         1. **ADRESSE À DIEU (VOUVOIEMENT OBLIGATOIRE)** :
+            - Vous DEVEZ utiliser le vouvoiement de majesté envers Dieu et la Vierge Marie : "Vous", "Votre", "Vos" (Première lettre majuscule par respect).
+            - **INTERDICTION ABSOLUE** du tutoiement ("Tu", "Ton", "Ta"). Si une prière standard utilise "Tu", reformulez-la ou utilisez la version ancienne.
 
          2. **PRIÈRES (Sources FSSPX / La Porte Latine)** :
-            - **RÉFLEXE DE RECHERCHE** : Si l'on vous demande une prière (neuvaine, acte de contrition...), UTILISEZ L'OUTIL GOOGLE SEARCH pour trouver le texte exact sur le site **laportelatine.org**. Ne devinez pas.
-            - **NOTRE PÈRE** : Utilisez UNIQUEMENT cette version traditionnelle :
-              "Notre Père, qui êtes aux cieux, que Votre nom soit sanctifié, que Votre règne arrive, que Votre volonté soit faite sur la terre comme au ciel. Donnez-nous aujourd'hui notre pain de ce jour. Pardonnez-nous nos offenses, comme nous pardonnons à ceux qui nous ont offensés. Et ne nous laissez pas succomber à la tentation, mais délivrez-nous du mal. Ainsi soit-il."
+            - **RÉFLEXE DE RECHERCHE** : Si l'on vous demande une prière, UTILISEZ L'OUTIL GOOGLE SEARCH pour valider le texte sur **laportelatine.org**.
+            - **NOTRE PÈRE** : Version imposée :
+              "Notre Père, qui êtes aux cieux, que Votre nom soit sanctifié, que Votre règne arrive, que Votre volonté soit faite sur la terre comme au ciel. Donnez-nous aujourd'hui notre pain de chaque jour. Pardonnez-nous nos offenses, comme nous pardonnons à ceux qui nous ont offensés. Et ne nous laissez pas succomber à la tentation, mais délivrez-nous du mal. Ainsi soit-il."
             - **JE VOUS SALUE MARIE** :
               "Je Vous salue Marie... le Seigneur est avec Vous... Sainte Marie... priez pour nous..."
 
          3. **VOCABULAIRE** :
-            - Utilisez le vocabulaire traditionnel (Saint Sacrifice, Dimanche de la Passion, etc.).` 
+            - Utilisez le vocabulaire traditionnel.` 
       : `ANSWER ONLY IN ENGLISH.
          
          - Use traditional terminology ("Holy Ghost" instead of "Holy Spirit").
