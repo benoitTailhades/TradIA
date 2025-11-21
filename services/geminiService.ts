@@ -91,7 +91,7 @@ class GeminiService {
     }
 
     if (!this.chatSession) {
-      this.initializeChat('en');
+      this.initializeChat('fr');
     }
 
     if (!this.chatSession) {

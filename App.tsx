@@ -132,7 +132,7 @@ const TEXTS = {
 };
 
 const App: React.FC = () => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('fr');
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -440,14 +440,14 @@ const App: React.FC = () => {
       {/* Input Area */}
       <footer className="p-4 bg-parchment sticky bottom-0 z-10">
         <div className="max-w-3xl mx-auto">
-          <div className="relative flex items-end gap-2 bg-white border border-stone-200 focus-within:border-stone-300 focus-within:shadow-md rounded-[26px] px-4 py-3 shadow-sm transition-all duration-200">
+          <div className="relative flex items-end gap-2 bg-white border border-stone-200 rounded-[26px] px-4 py-3 shadow-sm transition-all duration-200">
             <textarea
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={t.placeholder}
-              className="flex-1 bg-transparent border-none focus:ring-0 resize-none max-h-40 text-stone-800 placeholder-stone-400 font-sans py-1 px-1 leading-relaxed"
+              className="flex-1 bg-transparent border-none focus:ring-0 outline-none resize-none max-h-40 text-stone-800 placeholder-stone-400 font-sans py-1 px-1 leading-relaxed"
               rows={1}
               disabled={isLoading}
             />
