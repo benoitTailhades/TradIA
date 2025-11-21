@@ -169,7 +169,7 @@ const App: React.FC = () => {
   // Adjust textarea height
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.style.height = 'inherit';
+      inputRef.current.style.height = 'auto'; // Use auto to correctly calculate shrinkage
       const scrollHeight = inputRef.current.scrollHeight;
       inputRef.current.style.height = `${Math.min(scrollHeight, 120)}px`;
     }
@@ -453,7 +453,7 @@ const App: React.FC = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={t.placeholder}
-              className="w-full bg-transparent border-none focus:ring-0 resize-none max-h-32 text-stone-800 placeholder-stone-400 font-sans py-1"
+              className="flex-1 bg-transparent border-none focus:ring-0 resize-none max-h-32 text-stone-800 placeholder-stone-400 font-sans py-1"
               rows={1}
               disabled={isLoading}
             />
