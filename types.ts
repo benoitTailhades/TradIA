@@ -13,3 +13,11 @@ export interface ChatState {
 }
 
 export type Language = 'en' | 'fr';
+
+export interface ChatSession {
+  id: string;
+  title: string;
+  messages: Message[];
+  createdAt: number;
+  language: Language;
+}

@@ -39,13 +39,19 @@ class GeminiService {
 
   constructor() {
     // Note: The actual key injection is handled in vite.config.ts via define
+    // But we also double check here for safety in dev
     const apiKey = process.env.API_KEY;
-    if (!apiKey) {
-      console.warn("Warning: API_KEY is missing. Chat will likely fail.");
-    } else {
-      console.log("Gemini Service Initialized with Key Length:", apiKey.length);
+    
+    // Debug log for development (visible in console)
+    if (typeof window !== 'undefined') {
+        console.log(`[Vox Debug] API Key Status: ${apiKey ? 'Loaded (' + apiKey.length + ' chars)' : 'MISSING'}`);
     }
+
     this.ai = new GoogleGenAI({ apiKey: apiKey || '' });
+  }
+
+  public resetChat() {
+    this.chatSession = null;
   }
 
   public initializeChat(language: Language) {
@@ -102,6 +108,7 @@ class GeminiService {
     }
 
     if (!this.chatSession) {
+      // Default to French if lazy loaded
       this.initializeChat('fr');
     }
 
