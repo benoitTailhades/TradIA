@@ -6,141 +6,148 @@ import { CrossIcon, SendIcon } from './components/Icon';
 // Powerful Pre-Vatican II / Traditional Quotes
 const QUOTES = [
   {
-    latin: "Non nobis, Domine, sed nomini tuo da gloriam (Psaume 113:9)",
-    en: "Not to us, O Lord, but to Thy name give glory.",
-    fr: "Pas à nous, Seigneur, mais à Votre Nom donnez la gloire."
+    latin: "Non nobis, Domine, sed nomini tuo da gloriam",
+    en: "Not to us, O Lord, but to Thy name give glory. (Ps 113:9)",
+    fr: "Pas à nous, Seigneur, mais à Votre Nom donnez la gloire. (Ps 113,9)"
   },
   {
-    latin: "Stat Crux dum volvitur orbis (Devise des Chartreux)",
-    en: "The Cross stands while the world turns.",
-    fr: "La Croix demeure tandis que le monde tourne."
+    latin: "Stat Crux dum volvitur orbis",
+    en: "The Cross stands while the world turns. (Carthusian motto)",
+    fr: "La Croix demeure tandis que le monde tourne. (Devise des Chartreux)"
   },
   {
-    latin: "Quis ut Deus? (Saint Michel Archange)",
-    en: "Who is like unto God?",
-    fr: "Qui est comme Dieu ?"
+    latin: "Quis ut Deus?",
+    en: "Who is like unto God? (St. Michael)",
+    fr: "Qui est comme Dieu ? (Saint Michel)"
   },
   {
-    latin: "Instaurare Omnia in Christo (Saint Pie X)",
-    en: "To restore all things in Christ.",
-    fr: "Tout restaurer dans le Christ."
+    latin: "Instaurare Omnia in Christo",
+    en: "To restore all things in Christ. (Pope Pius X)",
+    fr: "Tout restaurer dans le Christ. (Saint Pie X)"
   },
   {
-    latin: "Adveniat Regnum Tuum (Notre Père – Jésus-Christ)",
-    en: "Thy Kingdom come.",
-    fr: "Que Votre règne arrive."
+    latin: "Adveniat Regnum Tuum",
+    en: "Thy Kingdom come. (Mt 6:10)",
+    fr: "Que Votre règne arrive. (Mt 6,10)"
   },
   {
-    latin: "In hoc signo vinces (Vision de Constantin)",
-    en: "In this sign thou shalt conquer.",
-    fr: "Par ce signe, Vous vaincrez."
+    latin: "In hoc signo vinces",
+    en: "In this sign thou shalt conquer. (Constantine, trad.)",
+    fr: "Par ce signe, Vous vaincrez. (Constantin, trad.)"
   },
   {
-    latin: "Ora et Labora (Saint Benoît)",
-    en: "Pray and work.",
-    fr: "Prie et travaille."
+    latin: "Ora et Labora",
+    en: "Pray and work. (St. Benedict / OSB)",
+    fr: "Prie et travaille. (Saint Benoît / OSB)"
   },
   {
-    latin: "Fides sine operibus mortua est (Épître de Saint Jacques)",
-    en: "Faith without works is dead.",
-    fr: "La foi sans les œuvres est morte."
+    latin: "Fides sine operibus mortua est",
+    en: "Faith without works is dead. (Jas 2:26)",
+    fr: "La foi sans les œuvres est morte. (Jc 2,26)"
   },
   {
-    latin: "Veritas liberabit vos (Évangile selon Saint Jean)",
-    en: "The truth shall set you free.",
-    fr: "La vérité vous affranchira."
+    latin: "Veritas liberabit vos",
+    en: "The truth shall set you free. (Jn 8:32)",
+    fr: "La vérité vous affranchira. (Jn 8,32)"
   },
   {
-    latin: "Sic transit gloria mundi (Cérémonial pontifical médiéval)",
-    en: "Thus passes the glory of the world.",
-    fr: "Ainsi passe la gloire du monde."
+    latin: "Sic transit gloria mundi",
+    en: "Thus passes the glory of the world. (Pontifical liturgy)",
+    fr: "Ainsi passe la gloire du monde. (Liturgie pontificale)"
   },
   {
-    latin: "Veni, vidi, vici (Jules César)",
-    en: "I came, I saw, I conquered.",
-    fr: "Je suis venu, j’ai vu, j’ai vaincu."
+    latin: "Veni, vidi, vici",
+    en: "I came, I saw, I conquered. (Julius Caesar)",
+    fr: "Je suis venu, j’ai vu, j’ai vaincu. (Jules César)"
+  },
+
+  // — REPLACEMENT #1 —
+  {
+    latin: "Domine, salva me",
+    en: "Lord, save me. (Mt 14:30)",
+    fr: "Seigneur, sauvez-moi. (Mt 14,30)"
+  },
+
+  {
+    latin: "Cor ad cor loquitur",
+    en: "Heart speaks to heart. (Card. Newman)",
+    fr: "Le cœur parle au cœur. (Cardinal Newman)"
   },
   {
-    latin: "Caritas in veritate (Pape Benoît XVI)",
-    en: "Charity in truth.",
-    fr: "La charité dans la vérité."
+    latin: "Nisi Dominus aedificaverit domum",
+    en: "Unless the Lord builds the house… (Ps 126:1)",
+    fr: "Si le Seigneur ne bâtit la maison… (Ps 126,1)"
   },
   {
-    latin: "Cor ad cor loquitur (Cardinal Newman)",
-    en: "Heart speaks to heart.",
-    fr: "Le cœur parle au cœur."
+    latin: "Credo ut intelligam",
+    en: "I believe so that I may understand. (St. Anselm)",
+    fr: "Je crois afin de comprendre. (Saint Anselme)"
   },
   {
-    latin: "Nisi Dominus aedificaverit domum, in vanum laboraverunt qui aedificant eam (Psaume 126)",
-    en: "Unless the Lord builds the house, they labor in vain who build it.",
-    fr: "Si le Seigneur ne bâtit la maison, c’est en vain que bâtissent les ouvriers."
+    latin: "Deus vult",
+    en: "God wills it. (Crusaders, trad.)",
+    fr: "Dieu le veut. (Croisés, trad.)"
   },
   {
-    latin: "Credo ut intelligam (Saint Anselme)",
-    en: "I believe so that I may understand.",
-    fr: "Je crois afin de comprendre."
+    latin: "Per crucem ad lucem",
+    en: "Through the Cross to the light. (Latin motto)",
+    fr: "Par la Croix jusqu’à la lumière. (Devise latine)"
   },
   {
-    latin: "Deus vult (Cri des Croisés)",
-    en: "God wills it.",
-    fr: "Dieu le veut."
+    latin: "Ecce Homo",
+    en: "Behold the Man. (Jn 19:5)",
+    fr: "Voici l’Homme. (Jn 19,5)"
   },
   {
-    latin: "Per crucem ad lucem (Spiritualité médiévale)",
-    en: "Through the Cross to the light.",
-    fr: "Par la Croix jusqu’à la lumière."
+    latin: "Domine, quo vadis?",
+    en: "Lord, where are You going? (Tradition on St. Peter)",
+    fr: "Seigneur, où allez-Vous ? (Tradition sur Saint Pierre)"
   },
   {
-    latin: "Ecce Homo (Ponce Pilate – Évangile)",
-    en: "Behold the Man.",
-    fr: "Voici l’Homme."
+    latin: "Initium sapientiae timor Domini",
+    en: "The fear of the Lord is the beginning of wisdom. (Prov 9:10)",
+    fr: "La crainte du Seigneur est le commencement de la sagesse. (Pr 9,10)"
   },
   {
-    latin: "Domine, quo vadis? (Tradition sur Saint Pierre)",
-    en: "Lord, where are You going?",
-    fr: "Seigneur, où allez-Vous ?"
+    latin: "Beati pauperes spiritu",
+    en: "Blessed are the poor in spirit. (Mt 5:3)",
+    fr: "Heureux les pauvres de cœur. (Mt 5,3)"
   },
   {
-    latin: "Initium sapientiae timor Domini (Proverbes 9:10)",
-    en: "The fear of the Lord is the beginning of wisdom.",
-    fr: "La crainte du Seigneur est le commencement de la sagesse."
+    latin: "Ad Majorem Dei Gloriam",
+    en: "For the greater glory of God. (SJ)",
+    fr: "Pour la plus grande gloire de Dieu. (SJ)"
+  },
+
+  // — REPLACEMENT #2 —
+  {
+    latin: "Oremus pro invicem",
+    en: "Let us pray for one another. (St. Benedict tradition)",
+    fr: "Prions les uns pour les autres. (Tradition bénédictine)"
+  },
+
+  {
+    latin: "Da mihi animas, caetera tolle",
+    en: "Give me souls, take the rest. (St. John Bosco)",
+    fr: "Donnez-moi des âmes, prenez le reste. (Saint Jean Bosco)"
   },
   {
-    latin: "Beati pauperes spiritu (Sermon sur la Montagne)",
-    en: "Blessed are the poor in spirit.",
-    fr: "Heureux les pauvres de cœur."
+    latin: "Ubi Petrus, ibi Ecclesia",
+    en: "Where Peter is, there is the Church. (St. Ambrose)",
+    fr: "Là où est Pierre, là est l’Église. (Saint Ambroise)"
   },
   {
-    latin: "Ad Majorem Dei Gloriam (Saint Ignace de Loyola)",
-    en: "For the greater glory of God.",
-    fr: "Pour la plus grande gloire de Dieu."
+    latin: "Pax vobis",
+    en: "Peace be unto you. (Jn 20:19)",
+    fr: "La paix soit avec vous. (Jn 20,19)"
   },
   {
-    latin: "Totus Tuus (Saint Jean-Paul II)",
-    en: "Totally yours.",
-    fr: "Tout à Vous."
-  },
-  {
-    latin: "Da mihi animas, caetera tolle (Saint Jean Bosco)",
-    en: "Give me souls, take the rest.",
-    fr: "Donnez-moi des âmes, prenez le reste."
-  },
-  {
-    latin: "Ubi Petrus, ibi Ecclesia (Saint Ambroise)",
-    en: "Where Peter is, there is the Church.",
-    fr: "Là où est Pierre, là est l’Église."
-  },
-  {
-    latin: "Pax vobis (Paroles de Jésus après la Résurrection)",
-    en: "Peace be unto you.",
-    fr: "La paix soit avec vous."
-  },
-  {
-    latin: "Si Deus pro nobis, quis contra nos? (Épître aux Romains)",
-    en: "If God is for us, who can be against us?",
-    fr: "Si Dieu est pour nous, qui sera contre nous ?"
+    latin: "Si Deus pro nobis, quis contra nos?",
+    en: "If God is for us, who can be against us? (Rom 8:31)",
+    fr: "Si Dieu est pour nous, qui sera contre nous ? (Rm 8,31)"
   }
 ];
+
 
 
 // UI Text Translations btw 
