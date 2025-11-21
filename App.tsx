@@ -172,8 +172,12 @@ const App: React.FC = () => {
       // Custom Error Messages handling
       if (error.message === 'API_NOT_ENABLED') {
         errorContent = language === 'fr' 
-          ? "⛔ **L'API n'est pas activée.**\n\nVous avez choisi un projet existant, mais l'API 'Generative Language API' n'est pas active dessus. \n\n[Cliquez ici pour l'activer](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com) puis redémarrez l'application."
-          : "⛔ **API Not Enabled.**\n\nYou selected an existing project, but the 'Generative Language API' is not enabled on it. \n\n[Click here to enable it](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com) and then restart the app.";
+          ? "⛔ **L'API n'est pas activée.**\n\nVous avez choisi un projet existant, mais l'API 'Generative Language API' n'est pas active dessus.\n\n[Cliquez ici pour l'activer](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com) puis redémarrez l'application."
+          : "⛔ **API Not Enabled.**\n\nYou selected an existing project, but the 'Generative Language API' is not enabled on it.\n\n[Click here to enable it](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com) and then restart the app.";
+      } else if (error.message === 'BILLING_REQUIRED') {
+        errorContent = language === 'fr'
+          ? "💳 **Facturation Requise.**\n\nLe projet Google Cloud associé à cette clé API nécessite un compte de facturation actif. Google exige souvent une carte bancaire pour vérifier votre identité, même pour l'utilisation gratuite.\n\n[Configurer la facturation](https://console.cloud.google.com/billing)"
+          : "💳 **Billing Required.**\n\nThe Google Cloud Project associated with this API key requires an active billing account. Google often requires a credit card for identity verification, even for free usage.\n\n[Setup Billing](https://console.cloud.google.com/billing)";
       } else if (error.message === 'INVALID_KEY') {
         errorContent = language === 'fr'
           ? "🔑 **Clé API Invalide.**\n\nVotre clé API semble incorrecte. Vérifiez votre fichier `.env`."
@@ -348,7 +352,7 @@ const App: React.FC = () => {
                       ? 'bg-white border border-stone-200 text-stone-800' 
                       : 'bg-parchment-dark border border-vatican-gold/30 text-ink'
                     }
-                    ${msg.content.includes("⛔") || msg.content.includes("🔑") ? "border-red-300 bg-red-50 text-stone-800" : ""}
+                    ${msg.content.includes("⛔") || msg.content.includes("🔑") || msg.content.includes("💳") ? "border-red-300 bg-red-50 text-stone-800" : ""}
                     `}
                   >
                     {formatText(msg.content)}

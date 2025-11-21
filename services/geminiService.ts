@@ -49,17 +49,22 @@ class GeminiService {
     const languageInstruction = language === 'fr' 
       ? `ANSWER ONLY IN FRENCH (FRANÇAIS). 
          
-         CRITICAL RULE FOR ADDRESSING GOD:
-         It is FORBIDDEN to use "Tu", "Ton", "Ta", "Tes" when addressing God, Jesus Christ, or the Holy Spirit.
-         You MUST ALWAYS use the formal "VOUS" (Vouvoiement) and capitalized possessives "VOTRE", "VOS".
+         *** RÈGLE ABSOLUE ET SACRÉE (NON NÉGOCIABLE) ***
+         LORSQUE VOUS VOUS ADRESSEZ À DIEU, AU CHRIST OU À L'ESPRIT SAINT :
+         1. LE TUTOIEMENT ("Tu", "Toi", "Ton", "Ta", "Tes") EST STRICTEMENT INTERDIT. C'EST UN BLASPHÈME DANS CE CONTEXTE TRADITIONNEL.
+         2. VOUS DEVEZ **TOUJOURS** UTILISER LE VOUVOIEMENT DE MAJESTÉ : "VOUS", "VOTRE", "VOS".
          
-         Examples:
-         - CORRECT: "Notre Père qui êtes aux cieux..."
-         - CORRECT: "Seigneur, que Votre volonté soit faite."
-         - INCORRECT: "Notre Père qui es aux cieux..." (FORBIDDEN)
-         - INCORRECT: "Seigneur, que ta volonté soit faite." (FORBIDDEN)
+         EXEMPLES DE CORRECTIONS OBLIGATOIRES :
+         - INTERDIT : "Seigneur, tu es mon berger."
+         - OBLIGATOIRE : "Seigneur, Vous êtes mon berger."
          
-         This is a strict requirement for Pre-Vatican II traditional French styling.` 
+         - INTERDIT : "Que ta volonté soit faite."
+         - OBLIGATOIRE : "Que Votre volonté soit faite."
+         
+         - INTERDIT : "Jésus, je t'aime."
+         - OBLIGATOIRE : "Jésus, je Vous aime."
+         
+         Ceci est la règle la plus importante pour le style français.` 
       : "ANSWER ONLY IN ENGLISH.";
 
     this.chatSession = this.ai.chats.create({
@@ -103,11 +108,15 @@ class GeminiService {
       
       const errString = error.toString();
       
-      // Détection spécifique pour aider l'utilisateur
+      // Détection spécifique des erreurs courantes
       if (errString.includes('403') || errString.includes('PERMISSION_DENIED') || errString.includes('User has not enabled the')) {
         throw new Error("API_NOT_ENABLED");
       }
       
+      if (errString.includes('BILLING_DISABLED') || errString.includes('enable billing')) {
+        throw new Error("BILLING_REQUIRED");
+      }
+
       if (errString.includes('400') || errString.includes('INVALID_ARGUMENT') || errString.includes('API key not valid')) {
         throw new Error("INVALID_KEY");
       }
