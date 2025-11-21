@@ -466,7 +466,7 @@ const App: React.FC = () => {
           </div>
           <div className="text-center mt-2 flex justify-between items-center px-4">
               <p className="text-[10px] text-stone-400 font-serif">{t.disclaimer}</p>
-              <p className="text-[9px] text-stone-300 uppercase font-display tracking-widest">v1.2 FSSPX</p>
+              <p className="text-[9px] text-stone-300 uppercase font-display tracking-widest">v1.0</p>
           </div>
         </div>
       </footer>
