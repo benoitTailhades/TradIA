@@ -3,14 +3,22 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Charge les variables depuis le fichier .env
+  // Charge les variables depuis le fichier .env localement
   const env = loadEnv(mode, process.cwd(), '');
   
-  // Stratégie de récupération de la clé "bulletproof" :
-  // 1. Regarde dans les variables système du processus (Vercel injecte souvent ici)
-  // 2. Regarde dans les variables chargées par Vite (.env)
-  // 3. Cherche 'clefAPI' (votre nom) ou 'API_KEY' (standard)
-  const apiKey = process.env.API_KEY || process.env.clefAPI || env.API_KEY || env.clefAPI;
+  // CRUCIAL : Ordre de priorité pour trouver la clé
+  // 1. process.env.clefAPI (Votre configuration spécifique Vercel)
+  // 2. process.env.API_KEY (Standard)
+  // 3. env.clefAPI (Local .env)
+  // 4. env.API_KEY (Local .env)
+  const apiKey = process.env.clefAPI || process.env.API_KEY || env.clefAPI || env.API_KEY;
+
+  // Log pour le build (ne montre pas la clé entière par sécurité)
+  if (apiKey) {
+    console.log(`✅ API Key detected during build (Length: ${apiKey.length})`);
+  } else {
+    console.warn("⚠️ NO API KEY DETECTED DURING BUILD");
+  }
 
   return {
     plugins: [react()],

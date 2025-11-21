@@ -6,36 +6,142 @@ import { CrossIcon, SendIcon } from './components/Icon';
 // Powerful Pre-Vatican II / Traditional Quotes
 const QUOTES = [
   {
-    latin: "Non nobis, Domine, sed nomini tuo da gloriam",
+    latin: "Non nobis, Domine, sed nomini tuo da gloriam (Psaume 113:9)",
     en: "Not to us, O Lord, but to Thy name give glory.",
-    fr: "Pas à nous, Seigneur, mais à Votre Nom donnez la gloire." // CORRIGÉ: Votre Nom
+    fr: "Pas à nous, Seigneur, mais à Votre Nom donnez la gloire."
   },
   {
-    latin: "Stat Crux dum volvitur orbis",
+    latin: "Stat Crux dum volvitur orbis (Devise des Chartreux)",
     en: "The Cross stands while the world turns.",
     fr: "La Croix demeure tandis que le monde tourne."
   },
   {
-    latin: "Quis ut Deus?",
+    latin: "Quis ut Deus? (Saint Michel Archange)",
     en: "Who is like unto God?",
     fr: "Qui est comme Dieu ?"
   },
   {
-    latin: "Instaurare Omnia in Christo",
+    latin: "Instaurare Omnia in Christo (Saint Pie X)",
     en: "To restore all things in Christ.",
     fr: "Tout restaurer dans le Christ."
   },
   {
-    latin: "Adveniat Regnum Tuum",
+    latin: "Adveniat Regnum Tuum (Notre Père – Jésus-Christ)",
     en: "Thy Kingdom come.",
     fr: "Que Votre règne arrive."
   },
   {
-    latin: "In hoc signo vinces",
+    latin: "In hoc signo vinces (Vision de Constantin)",
     en: "In this sign thou shalt conquer.",
-    fr: "Par ce signe, vous vaincrez."
+    fr: "Par ce signe, Vous vaincrez."
+  },
+  {
+    latin: "Ora et Labora (Saint Benoît)",
+    en: "Pray and work.",
+    fr: "Prie et travaille."
+  },
+  {
+    latin: "Fides sine operibus mortua est (Épître de Saint Jacques)",
+    en: "Faith without works is dead.",
+    fr: "La foi sans les œuvres est morte."
+  },
+  {
+    latin: "Veritas liberabit vos (Évangile selon Saint Jean)",
+    en: "The truth shall set you free.",
+    fr: "La vérité vous affranchira."
+  },
+  {
+    latin: "Sic transit gloria mundi (Cérémonial pontifical médiéval)",
+    en: "Thus passes the glory of the world.",
+    fr: "Ainsi passe la gloire du monde."
+  },
+  {
+    latin: "Veni, vidi, vici (Jules César)",
+    en: "I came, I saw, I conquered.",
+    fr: "Je suis venu, j’ai vu, j’ai vaincu."
+  },
+  {
+    latin: "Caritas in veritate (Pape Benoît XVI)",
+    en: "Charity in truth.",
+    fr: "La charité dans la vérité."
+  },
+  {
+    latin: "Cor ad cor loquitur (Cardinal Newman)",
+    en: "Heart speaks to heart.",
+    fr: "Le cœur parle au cœur."
+  },
+  {
+    latin: "Nisi Dominus aedificaverit domum, in vanum laboraverunt qui aedificant eam (Psaume 126)",
+    en: "Unless the Lord builds the house, they labor in vain who build it.",
+    fr: "Si le Seigneur ne bâtit la maison, c’est en vain que bâtissent les ouvriers."
+  },
+  {
+    latin: "Credo ut intelligam (Saint Anselme)",
+    en: "I believe so that I may understand.",
+    fr: "Je crois afin de comprendre."
+  },
+  {
+    latin: "Deus vult (Cri des Croisés)",
+    en: "God wills it.",
+    fr: "Dieu le veut."
+  },
+  {
+    latin: "Per crucem ad lucem (Spiritualité médiévale)",
+    en: "Through the Cross to the light.",
+    fr: "Par la Croix jusqu’à la lumière."
+  },
+  {
+    latin: "Ecce Homo (Ponce Pilate – Évangile)",
+    en: "Behold the Man.",
+    fr: "Voici l’Homme."
+  },
+  {
+    latin: "Domine, quo vadis? (Tradition sur Saint Pierre)",
+    en: "Lord, where are You going?",
+    fr: "Seigneur, où allez-Vous ?"
+  },
+  {
+    latin: "Initium sapientiae timor Domini (Proverbes 9:10)",
+    en: "The fear of the Lord is the beginning of wisdom.",
+    fr: "La crainte du Seigneur est le commencement de la sagesse."
+  },
+  {
+    latin: "Beati pauperes spiritu (Sermon sur la Montagne)",
+    en: "Blessed are the poor in spirit.",
+    fr: "Heureux les pauvres de cœur."
+  },
+  {
+    latin: "Ad Majorem Dei Gloriam (Saint Ignace de Loyola)",
+    en: "For the greater glory of God.",
+    fr: "Pour la plus grande gloire de Dieu."
+  },
+  {
+    latin: "Totus Tuus (Saint Jean-Paul II)",
+    en: "Totally yours.",
+    fr: "Tout à Vous."
+  },
+  {
+    latin: "Da mihi animas, caetera tolle (Saint Jean Bosco)",
+    en: "Give me souls, take the rest.",
+    fr: "Donnez-moi des âmes, prenez le reste."
+  },
+  {
+    latin: "Ubi Petrus, ibi Ecclesia (Saint Ambroise)",
+    en: "Where Peter is, there is the Church.",
+    fr: "Là où est Pierre, là est l’Église."
+  },
+  {
+    latin: "Pax vobis (Paroles de Jésus après la Résurrection)",
+    en: "Peace be unto you.",
+    fr: "La paix soit avec vous."
+  },
+  {
+    latin: "Si Deus pro nobis, quis contra nos? (Épître aux Romains)",
+    en: "If God is for us, who can be against us?",
+    fr: "Si Dieu est pour nous, qui sera contre nous ?"
   }
 ];
+
 
 // UI Text Translations btw 
 const TEXTS = {
@@ -184,8 +290,8 @@ const App: React.FC = () => {
           : "🔑 **Invalid API Key.**\n\nYour API key appears to be incorrect. Check your `.env` file.";
       } else if (error.message === 'MISSING_KEY') {
         errorContent = language === 'fr'
-          ? "❓ **Clé manquante.**\n\nLe fichier `.env` n'est pas détecté ou la variable API_KEY (ou clefAPI) est vide."
-          : "❓ **Missing Key.**\n\nThe `.env` file was not found or API_KEY is empty.";
+          ? "❓ **Clé manquante.**\n\nLe système n'a pas trouvé la clé. Assurez-vous d'avoir ajouté `clefAPI` dans les variables d'environnement Vercel."
+          : "❓ **Missing Key.**\n\nThe system could not find the key. Ensure you added `clefAPI` in Vercel Environment Variables.";
       } else if (error.message) {
          errorContent += `\n\n(Erreur technique : ${error.message})`;
       }
@@ -394,8 +500,9 @@ const App: React.FC = () => {
               )}
             </button>
           </div>
-          <div className="text-center mt-2">
+          <div className="text-center mt-2 flex justify-between items-center px-2">
               <p className="text-[10px] text-stone-400 font-serif">{t.disclaimer}</p>
+              <p className="text-[9px] text-stone-300 uppercase font-display tracking-widest">v1.1 FSSPX</p>
           </div>
         </div>
       </footer>
