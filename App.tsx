@@ -35,9 +35,6 @@ const QUOTES = [
     en: "In this sign thou shalt conquer. (Vision of Emperor Constantine)",
     fr: "Par ce signe, Vous vaincrez. (Vision de l’empereur Constantin)"
   },
-
-  // NOUVELLES CITATIONS AJOUTÉES
-
   {
     latin: "Deus vult!",
     en: "God wills it! (Battle cry of the Crusaders)",
@@ -110,9 +107,6 @@ const QUOTES = [
   }
 ];
 
-
-
-
 // UI Text Translations btw 
 const TEXTS = {
   en: {
@@ -171,7 +165,7 @@ const App: React.FC = () => {
     if (inputRef.current) {
       inputRef.current.style.height = 'auto'; // Use auto to correctly calculate shrinkage
       const scrollHeight = inputRef.current.scrollHeight;
-      inputRef.current.style.height = `${Math.min(scrollHeight, 120)}px`;
+      inputRef.current.style.height = `${Math.min(scrollHeight, 160)}px`; // Increased max height slightly
     }
   }, [input]);
 
@@ -382,7 +376,7 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto relative scroll-smooth">
-        <div className="max-w-3xl mx-auto px-4 py-8 space-y-8 min-h-full">
+        <div className="max-w-3xl mx-auto px-4 py-8 space-y-8 min-h-full pb-32">
           {/* Empty State Greeting (if no messages) */}
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center min-h-[50vh] animate-fade-in text-center">
@@ -444,35 +438,35 @@ const App: React.FC = () => {
       </main>
 
       {/* Input Area */}
-      <footer className="p-4 bg-white/80 backdrop-blur-md border-t border-vatican-gold/20">
-        <div className="max-w-3xl mx-auto relative">
-          <div className="relative flex items-end gap-2 bg-white border border-stone-300 focus-within:border-vatican-gold focus-within:ring-1 focus-within:ring-vatican-gold/50 rounded-xl px-4 py-3 shadow-sm transition-all duration-200">
+      <footer className="p-4 bg-parchment sticky bottom-0 z-10">
+        <div className="max-w-3xl mx-auto">
+          <div className="relative flex items-end gap-2 bg-white border border-stone-200 focus-within:border-stone-300 focus-within:shadow-md rounded-[26px] px-4 py-3 shadow-sm transition-all duration-200">
             <textarea
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={t.placeholder}
-              className="flex-1 bg-transparent border-none focus:ring-0 resize-none max-h-32 text-stone-800 placeholder-stone-400 font-sans py-1"
+              className="flex-1 bg-transparent border-none focus:ring-0 resize-none max-h-40 text-stone-800 placeholder-stone-400 font-sans py-1 px-1 leading-relaxed"
               rows={1}
               disabled={isLoading}
             />
             <button
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
-              className="mb-0.5 p-2 rounded-lg bg-cardinal-red text-white hover:bg-cardinal-red-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex-shrink-0"
+              className={`mb-0.5 p-2 rounded-full transition-all duration-200 flex-shrink-0 flex items-center justify-center w-9 h-9 ${input.trim() && !isLoading ? 'bg-cardinal-red text-white hover:bg-cardinal-red-dark' : 'bg-stone-200 text-stone-400 cursor-not-allowed'}`}
               aria-label="Send message"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
-                <SendIcon className="w-5 h-5" />
+                <SendIcon className="w-4 h-4 ml-0.5" />
               )}
             </button>
           </div>
-          <div className="text-center mt-2 flex justify-between items-center px-2">
+          <div className="text-center mt-2 flex justify-between items-center px-4">
               <p className="text-[10px] text-stone-400 font-serif">{t.disclaimer}</p>
-              <p className="text-[9px] text-stone-300 uppercase font-display tracking-widest">v1.1 FSSPX</p>
+              <p className="text-[9px] text-stone-300 uppercase font-display tracking-widest">v1.2 FSSPX</p>
           </div>
         </div>
       </footer>
