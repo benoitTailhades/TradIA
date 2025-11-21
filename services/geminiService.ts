@@ -40,14 +40,26 @@ class GeminiService {
   constructor() {
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
-      console.error("API_KEY is missing from environment variables");
+      console.warn("Warning: API_KEY is missing from environment variables. Chat will fail.");
     }
     this.ai = new GoogleGenAI({ apiKey: apiKey || '' });
   }
 
   public initializeChat(language: Language) {
     const languageInstruction = language === 'fr' 
-      ? "ANSWER ONLY IN FRENCH (FRANÇAIS). IMPORTANT: When addressing God, ALWAYS use 'VOUS' (vouvoiement) and capitalized pronouns (Vous, Votre, Vos, Lui). NEVER use 'tu', 'ton', 'ta', or 'tes' for God. Example: 'Notre Père qui êtes aux cieux', 'Que Votre volonté soit faite' (NOT 'Ta volonté'). This is a strict requirement for Pre-Vatican II traditional French styling." 
+      ? `ANSWER ONLY IN FRENCH (FRANÇAIS). 
+         
+         CRITICAL RULE FOR ADDRESSING GOD:
+         It is FORBIDDEN to use "Tu", "Ton", "Ta", "Tes" when addressing God, Jesus Christ, or the Holy Spirit.
+         You MUST ALWAYS use the formal "VOUS" (Vouvoiement) and capitalized possessives "VOTRE", "VOS".
+         
+         Examples:
+         - CORRECT: "Notre Père qui êtes aux cieux..."
+         - CORRECT: "Seigneur, que Votre volonté soit faite."
+         - INCORRECT: "Notre Père qui es aux cieux..." (FORBIDDEN)
+         - INCORRECT: "Seigneur, que ta volonté soit faite." (FORBIDDEN)
+         
+         This is a strict requirement for Pre-Vatican II traditional French styling.` 
       : "ANSWER ONLY IN ENGLISH.";
 
     this.chatSession = this.ai.chats.create({
@@ -63,6 +75,11 @@ class GeminiService {
     message: string, 
     onChunk: (text: string) => void
   ): Promise<void> {
+    // Vérification immédiate de la clé
+    if (!process.env.API_KEY) {
+       throw new Error("MISSING_KEY");
+    }
+
     if (!this.chatSession) {
       // Default to English if not initialized explicitly (fallback)
       this.initializeChat('en');
@@ -81,8 +98,20 @@ class GeminiService {
           onChunk(text);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error in Gemini stream:", error);
+      
+      const errString = error.toString();
+      
+      // Détection spécifique pour aider l'utilisateur
+      if (errString.includes('403') || errString.includes('PERMISSION_DENIED') || errString.includes('User has not enabled the')) {
+        throw new Error("API_NOT_ENABLED");
+      }
+      
+      if (errString.includes('400') || errString.includes('INVALID_ARGUMENT') || errString.includes('API key not valid')) {
+        throw new Error("INVALID_KEY");
+      }
+      
       throw error;
     }
   }

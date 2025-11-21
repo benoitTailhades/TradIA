@@ -46,7 +46,7 @@ const TEXTS = {
     you: "You",
     bot: "Vox Traditionis",
     disclaimer: "Answers based on Pre-Vatican II (pre-1962) Catholic texts. Secular queries answered normally.",
-    error: "Mea culpa. I encountered an error retrieving the requested information. Please try again.",
+    error: "Mea culpa. I encountered an error.",
     clearConfirm: "Changing language will start a new conversation. Continue?"
   },
   fr: {
@@ -56,7 +56,7 @@ const TEXTS = {
     you: "Vous",
     bot: "Vox Traditionis",
     disclaimer: "Réponses basées sur la doctrine catholique pré-Vatican II (avant 1962). Questions laïques traitées normalement.",
-    error: "Mea culpa. J'ai rencontré une erreur. Veuillez réessayer.",
+    error: "Mea culpa. J'ai rencontré une erreur.",
     clearConfirm: "Changer de langue commencera une nouvelle conversation. Continuer ?"
   }
 };
@@ -164,12 +164,32 @@ const App: React.FC = () => {
         )
       );
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to send message", error);
+      
+      let errorContent = t.error;
+
+      // Custom Error Messages handling
+      if (error.message === 'API_NOT_ENABLED') {
+        errorContent = language === 'fr' 
+          ? "⛔ **L'API n'est pas activée.**\n\nVous avez choisi un projet existant, mais l'API 'Generative Language API' n'est pas active dessus. \n\n[Cliquez ici pour l'activer](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com) puis redémarrez l'application."
+          : "⛔ **API Not Enabled.**\n\nYou selected an existing project, but the 'Generative Language API' is not enabled on it. \n\n[Click here to enable it](https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com) and then restart the app.";
+      } else if (error.message === 'INVALID_KEY') {
+        errorContent = language === 'fr'
+          ? "🔑 **Clé API Invalide.**\n\nVotre clé API semble incorrecte. Vérifiez votre fichier `.env`."
+          : "🔑 **Invalid API Key.**\n\nYour API key appears to be incorrect. Check your `.env` file.";
+      } else if (error.message === 'MISSING_KEY') {
+        errorContent = language === 'fr'
+          ? "❓ **Clé manquante.**\n\nLe fichier `.env` n'est pas détecté ou la variable API_KEY est vide."
+          : "❓ **Missing Key.**\n\nThe `.env` file was not found or API_KEY is empty.";
+      } else if (error.message) {
+         errorContent += `\n\n(Erreur technique : ${error.message})`;
+      }
+
       const errorMsg: Message = {
         id: Date.now().toString(),
         role: 'model',
-        content: t.error,
+        content: errorContent,
         timestamp: Date.now(),
       };
       setMessages(prev => [...prev.filter(m => m.id !== modelMsgId), errorMsg]);
@@ -185,19 +205,59 @@ const App: React.FC = () => {
     }
   };
 
-  // Format Text with very basic bold handling for display
+  // Format Text with basic bold and link handling
   const formatText = (text: string) => {
-    return text.split('\n').map((line, i) => (
-      <React.Fragment key={i}>
-        {line.split(/(\*\*.*?\*\*)/).map((part, j) => {
-          if (part.startsWith('**') && part.endsWith('**')) {
-            return <strong key={j} className="font-semibold text-ink">{part.slice(2, -2)}</strong>;
-          }
-          return <span key={j}>{part}</span>;
-        })}
-        <br />
-      </React.Fragment>
-    ));
+    return text.split('\n').map((line, i) => {
+      // Basic link parser for markdown style [Text](URL)
+      const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+      const parts = [];
+      let lastIndex = 0;
+      let match;
+
+      while ((match = linkRegex.exec(line)) !== null) {
+        // Push text before link
+        if (match.index > lastIndex) {
+          parts.push(line.substring(lastIndex, match.index));
+        }
+        // Push link
+        parts.push(
+          <a 
+            key={match.index} 
+            href={match[2]} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-cardinal-red underline hover:text-cardinal-red-dark font-bold"
+          >
+            {match[1]}
+          </a>
+        );
+        lastIndex = match.index + match[0].length;
+      }
+      // Push remaining text
+      if (lastIndex < line.length) {
+        parts.push(line.substring(lastIndex));
+      }
+
+      // If no links, process bold
+      const content = parts.length > 0 ? parts : [line];
+
+      return (
+        <React.Fragment key={i}>
+          {content.map((part, k) => {
+            if (typeof part === 'string') {
+               return part.split(/(\*\*.*?\*\*)/).map((subPart, j) => {
+                if (subPart.startsWith('**') && subPart.endsWith('**')) {
+                  return <strong key={`${k}-${j}`} className="font-semibold text-ink">{subPart.slice(2, -2)}</strong>;
+                }
+                return <span key={`${k}-${j}`}>{subPart}</span>;
+              });
+            }
+            return part;
+          })}
+          <br />
+        </React.Fragment>
+      );
+    });
   };
 
   return (
@@ -287,7 +347,9 @@ const App: React.FC = () => {
                     ${msg.role === 'user' 
                       ? 'bg-white border border-stone-200 text-stone-800' 
                       : 'bg-parchment-dark border border-vatican-gold/30 text-ink'
-                    }`}
+                    }
+                    ${msg.content.includes("⛔") || msg.content.includes("🔑") ? "border-red-300 bg-red-50 text-stone-800" : ""}
+                    `}
                   >
                     {formatText(msg.content)}
                     {msg.isStreaming && (
